@@ -1,1 +1,71 @@
-<p>recipes works!</p>
+<div class="m-2">
+  <select
+    class="p-2 rounded-lg m-1"
+    name="mealType"
+    id="mealType"
+    [(ngModel)]="mealType"
+  >
+    <option value="">Meal type</option>
+    <option [value]="breakfast">Breakfast</option>
+    <option [value]="brunch">Brunch</option>
+    <option [value]="lunch">Lunch</option>
+    <option [value]="dinner">Dinner</option>
+    <option [value]="desserts">Dessert</option>
+    <option [value]="snack">Snack</option>
+    <option [value]="teatime">Teatime</option>
+  </select>
+
+  <select
+    class="p-2 rounded-lg m-1"
+    name="cuisineType"
+    id="cuisineType"
+    [(ngModel)]="cuisineType"
+  >
+    <option value="">Cuisine Type</option>
+    <option [value]="american">American</option>
+    <option [value]="british">British</option>
+    <option [value]="french">French</option>
+    <option [value]="italian">Italian</option>
+    <option [value]="nordic">Nordic</option>
+    <option [value]="indian">Indian</option>
+    <option [value]="caribbean">Caribbean</option>
+  </select>
+
+  <input
+    class="p-2 rounded-lg m-1"
+    type="text"
+    placeholder="Search.."
+    [(ngModel)]="searchterm"
+  />
+
+  <button
+    class="p-2 rounded-lg m-1 bg-violet-400 text-white hover:bg-purple-900"
+    type="button"
+    (click)="searchRecipe()"
+  >
+    Search
+  </button>
+</div>
+
+<div class="flex w-full flex-wrap justify-center">
+  
+  @for(recipe of recipes; track recipe){
+    <a
+    class="h-auto max-w-full w-60 m-2"   
+    [routerLink]="['/recipe/', getRecipeIdFromUri(recipe.uri)]"
+    routerLinkActive="active"
+  >
+    <img
+      class="rounded-lg mx-auto shadow-lg"
+      [src]="recipe.image"
+      [alt]="recipe.label"
+    />
+    <h2
+      class="bg-white text-slate-950 rounded-lg p-2 mt-2 shadow-lg hover:bg-purple-900 hover:text-white"
+    >
+      {{ recipe.label }}
+    </h2>
+  </a>
+    } @empty {<p>Please search for a recipe.</p>}
+       
+</div>
