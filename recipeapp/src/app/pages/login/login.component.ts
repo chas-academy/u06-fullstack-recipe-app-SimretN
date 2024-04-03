@@ -22,7 +22,7 @@ loginDetails: Logindetails;// vi behöver göra själva
     };
   }
 
-  login(){ //we are going to do by our selvs
+  login(){ //we are going to do by our selves
     this.auth.loginUser(this.loginDetails);
   }
 }

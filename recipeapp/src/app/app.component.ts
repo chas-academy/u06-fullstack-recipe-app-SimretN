@@ -11,6 +11,7 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { AuthService } from './services/auth.service';
 import { Observable } from 'rxjs';
 import { LoggedInUser } from './interfaces/loggedinuser';
+import { Logindetails } from './interfaces/logindetails';
 
 
 
@@ -18,7 +19,7 @@ import { LoggedInUser } from './interfaces/loggedinuser';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive,],
+  imports: [CommonModule, AsyncPipe, RouterOutlet, RouterLink, RouterLinkActive],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -29,5 +30,25 @@ export class AppComponent {
 
   constructor(private auth:AuthService){
     this.loggedIn$ = this.auth.loggedIn$;
+  } 
+
+  /*loginDetails: LoginDetails;
+
+  loggedIn$: Observable<boolean>;
+
+  constructor(private auth: AuthService){
+    this.loginDetails = {
+      email:"seb@seb.seb",
+      password:"sebsebseb"
+    }
+
+    this.loggedIn$ = this.auth.loggedIn$;
   }
+
+  login(){
+    this.auth.loginUser(this.loginDetails);
+  }
+  logout(){
+    this.auth.logOut();
+  } */
 }

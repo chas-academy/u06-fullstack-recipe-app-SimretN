@@ -1,3 +1,5 @@
+
+
 // import { Injectable } from '@angular/core';
 // import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 // import { Observable, throwError } from 'rxjs';
@@ -53,26 +55,26 @@ import {
   HttpHeaders,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, throwError } from 'rxjs';
 import { Logindetails } from '../interfaces/logindetails';
 import { User } from '../interfaces/user';
 import { LoggedInUser } from '../interfaces/loggedinuser';
+import { tap } from 'rxjs/operators';
+
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  registerUser(value: Partial<{ name: string | null; email: string | null; password: string | null; password_confirmation: string | null; }>) {
-    throw new Error('Method not implemented.');
-  }
+  
   private loggedIn = new BehaviorSubject<LoggedInUser>({
     user: undefined,
     loginState: false,
   });
   loggedIn$ = this.loggedIn.asObservable();
 
-  private baseUrl = '';//link from deployment
-
+  private baseUrl = 'http://127.0.0.1:8000/api/';
+  
   private httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -84,12 +86,13 @@ export class AuthService {
   updateLoginState(loginState: LoggedInUser) {
     this.loggedIn.next(loginState);
   }
+
   getLoginStatus() {
     return this.loggedIn.value.loginState;
   }
-  loginUser(loginDetails: Logindetails) {
-    this.http
-      .post<any>(this.baseUrl + 'login', loginDetails, this.httpOptions)
+
+  loginUser(loginDetails: any) {
+    this.http.post<any>(this.baseUrl + 'login', loginDetails, this.httpOptions)
       .pipe(catchError(this.handleError))
       .subscribe((result) => {
         console.log(result);
@@ -103,7 +106,21 @@ export class AuthService {
         );
       });
   }
-  logoutUser() {} //göra själv
+
+  logoutUser() {
+     // Clear authentication state
+      this.updateLoginState({
+        user: undefined,
+        loginState: false,
+      });
+  }
+
+  registerUser(userData: any): Observable<any> {
+    return this.http.post<any>(this.baseUrl + 'register', userData, this.httpOptions)
+      .pipe(catchError(this.handleError));
+
+  }
+
   getCurrentUser() {
     let user: User;
     user = {
@@ -112,11 +129,7 @@ export class AuthService {
       email: '',
       created_at: '',
     };
-    this.http
-      .get<User[]>(
-        this.baseUrl + 'getUser/' + this.loggedIn.value.user?.id,
-        this.httpOptions
-      )
+    this.http.get<User[]>(this.baseUrl + 'getUser/' + this.loggedIn.value.user?.id, this.httpOptions)
       .subscribe((res) => (user = res[0]));
     return user;
   }
@@ -125,13 +138,9 @@ export class AuthService {
     if (error.status === 404) {
       console.error('An error occurred', error.error);
     } else {
-      console.error(
-        `Backend returned code ${error.status}, body was `,
-        error.error
-      );
+      console.error(`Backend returned code ${error.status}, body was `, error.error);
     }
-    return throwError(
-      () => new Error('Something bad happened; please try again later')
-    );
+    return throwError(() => new Error('Something bad happened; please try again later'));
   }
 }
+
