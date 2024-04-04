@@ -1,6 +1,6 @@
- <!-- <div class="bg-white w-fit mx-auto px-20 py-5 m-2 rounded-lg shadow-lg">
+ <div class="bg-white w-fit mx-auto px-20 py-5 m-2 rounded-lg shadow-lg">
     <h2 class="text-center text-2xl text-purple-900 italic" *ngIf="recipe">{{ recipe.label }}</h2>
-  <img class="rounded-lg flex mx-auto m-8" *ngIf="recipe" [src]="{{recipe.image}}" [alt]="recipe.label">
+  <img class="rounded-lg flex mx-auto m-8" *ngIf="recipe" [src]="recipe.image" [alt]="recipe.label">
     <ul *ngIf="recipe">
       <li class="list-decimal text-left" *ngFor="let ingredientLines of recipe.ingredientLines">
         {{ ingredientLines }}
@@ -15,8 +15,8 @@
           <img class="w-40 rounded-lg" [src]="ingredient.image" alt="ingredient.text">
         </div>
         <p class="mx-4">
-          {{ingredients.text }}
+          {{ingredient.text }}
         </p>
       </li>
     </ul>
-  </div>  -->
+  </div> 
