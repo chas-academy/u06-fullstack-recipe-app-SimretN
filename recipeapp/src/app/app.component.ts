@@ -32,6 +32,9 @@ export class AppComponent {
     this.loggedIn$ = this.auth.loggedIn$;
   } 
 
+  logout(){
+    this.auth.logoutUser();
+  } 
   /*loginDetails: LoginDetails;
 
   loggedIn$: Observable<boolean>;

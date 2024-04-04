@@ -46,17 +46,6 @@ export class LoginComponent {
     }
   }
 
-/*loginDetails: Logindetails;// vi behöver göra själva
 
-  constructor(private auth: AuthService) {
-    this.loginDetails = {
-      email: '',
-      password: '',
-    };
-  }
-
-  login(){ //we are going to do by our selves
-    this.auth.loginUser(this.loginDetails);
-  }*/
 }
   

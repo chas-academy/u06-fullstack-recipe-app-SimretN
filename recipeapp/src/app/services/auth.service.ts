@@ -109,13 +109,16 @@ export class AuthService {
   }
 
   logoutUser() {
-    this.http.post(this.baseUrl + 'logout',{},this.httpOptions).pipe(catchError(this.handleError));
-    this.httpOptions.headers = this.httpOptions.headers.delete("Authorization");
-     // Clear authentication state
-      this.updateLoginState({
-        user: undefined,
-        loginState: false,
-      });
+    console.log('hello from logoutUser');
+    this.http.post(this.baseUrl + 'logout',{},this.httpOptions).pipe(catchError(this.handleError)).subscribe(res => {
+      this.httpOptions.headers = this.httpOptions.headers.delete("Authorization");
+      // Clear authentication state
+       this.updateLoginState({
+         user: undefined,
+         loginState: false,
+       });
+    });
+    
   }
 
   registerUser(userData: any): Observable<any> {
