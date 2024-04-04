@@ -38,6 +38,7 @@ export class signupComponent {
 
   signup() {
     if (this.registerForm.valid) {
+      console.log(this.registerForm.value);
       const userData = {
         name: this.registerForm.value.name,
         email: this.registerForm.value.email,

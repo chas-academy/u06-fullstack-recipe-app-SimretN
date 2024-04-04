@@ -91,23 +91,26 @@ export class AuthService {
     return this.loggedIn.value.loginState;
   }
 
-  loginUser(loginDetails: any) {
-    this.http.post<any>(this.baseUrl + 'login', loginDetails, this.httpOptions)
-      .pipe(catchError(this.handleError))
-      .subscribe((result) => {
+  loginUser(loginDetails: any): Observable<any> {
+    return this.http.post<any>(this.baseUrl + 'login', loginDetails, this.httpOptions)
+      .pipe(catchError(this.handleError),
+      tap(result => {
         console.log(result);
         this.updateLoginState({
           user: result.user,
           loginState: true,
-        });
+        });     
         this.httpOptions.headers = this.httpOptions.headers.set(
           'Authorization',
           'Bearer ' + result.token
         );
-      });
+      })
+    );
   }
 
   logoutUser() {
+    this.http.post(this.baseUrl + 'logout',{},this.httpOptions).pipe(catchError(this.handleError));
+    this.httpOptions.headers = this.httpOptions.headers.delete("Authorization");
      // Clear authentication state
       this.updateLoginState({
         user: undefined,
