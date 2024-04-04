@@ -3,13 +3,11 @@ import { LoginComponent } from '../login/login.component';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-//import { User } from '../../interfaces/user';
 import { HttpErrorResponse } from '@angular/common/http';
-//import { User } from '../../services/user.service';
 import { throwError } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
 import { User } from '../../interfaces/user';
-//import { AuthService } from '../../services/auth.service';
+
 
 @Component({
   selector: 'app-signup',

@@ -1,8 +1,3 @@
-// import { Component } from '@angular/core';
-// import { ActivatedRoute, RouterModule, RouterOutlet } from '@angular/router';
-// import { RecipeService } from '../../services/recipe.service';
-// import { FormsModule } from '@angular/forms';
-
 import { Component } from '@angular/core';
 import { Recipe } from '../../interfaces/recipe';
 import { RecipeService } from '../../services/recipe.service';
