@@ -46,7 +46,7 @@ export class RecipesComponent {
 
   searchRecipe() {
     this.recipeService.getRecipes(this.searchterm, this.cuisineType, this.mealType).subscribe((result) => {
-      console.log(result);
+      //console.log(result);
       let recipes: Recipe[];
       recipes = result.hits.map((item: { recipe: {uri: any; label: any; image: any; ingredientLines: any; totalTime: any; }; _links: { self: { href: any; }; }; }) => {
         return {
@@ -58,7 +58,7 @@ export class RecipesComponent {
           selfref: item._links.self.href,
         };
       });
-      console.table(recipes);
+      //console.table(recipes);
       this.recipes = recipes;
     });
   }
