@@ -37,6 +37,8 @@ export class RecipesComponent {
   indian = "Indian";
   caribbean = "Caribbean";
 
+  
+
   constructor(private recipeService: RecipeService) {}
 
   searchRecipe() {

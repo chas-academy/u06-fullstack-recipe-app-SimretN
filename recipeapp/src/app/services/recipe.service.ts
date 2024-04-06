@@ -22,7 +22,7 @@ export class RecipeService {
 
    constructor(private http:HttpClient) { }
    
-  getRecipes(searchterm = "meat", quisineType="American", mealType="Lunch"): Observable<any> {
+   getRecipes(searchterm = "meat", quisineType="American", mealType="Lunch"): Observable<any> {
     let url = this.baseUrl + "?type=" + this.type + "&q=" + searchterm + "&app_id=" + this.app_id + "&app_key=" + this.app_key + "&cuisineType=" + quisineType + "&mealType=" + mealType;
     return this.http.get<any>(url, this.httpOptions);
   }
