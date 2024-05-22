@@ -48,3 +48,10 @@ För att få VG på den här uppgiften så ska ni utöka programmet så att anv�
 Mer info går att hitta i uppgiftsbeksrivningen i Canvas.
 
 Lycka till!
+to run this frontend part(recipeapp) write in terminal.
+    cd recipeapp
+    ng serve
+
+To run the backend part (RecipeAPI) write in terminal,,,
+     cd RecipeAPI
+     php artisan serve
